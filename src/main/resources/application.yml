@@ -1,6 +1,19 @@
 server:
   port: 8761
+
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+
 eureka:
+  # Eureka 인스턴스의 호스트 이름을 명시적으로 지정
+  instance:
+    hostname: localhost
   client:
     register-with-eureka: false
     fetch-registry: false
+    # 자기 자신에게 접속할 때도 인증 정보를 포함한 전체 주소 사용
+    service-url:
+      defaultZone: http://admin:admin@${eureka.instance.hostname}:${server.port}/eureka/
